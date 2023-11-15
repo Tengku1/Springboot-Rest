@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: NorthwindApi
+  description: >
+    'NorthwindApi for bootcamp only'
+  termsOfService: code.id
+  contact:
+    email: support@packtpub.com
+  license:
+    name: MIT
+    url: code.id
+  version: 1.0.0
+externalDocs:
+  description: Any document link you want to generate along with API.
+  url: http://swagger.io
+servers:
+  - url: https://ecommerce.swagger.io/v2
+tags:
+  - name: northwind
+    description: Everything about northwind
+    externalDocs:
+      description: Find out more (extra document link)
+      url: http://swagger.io
+  - name: order
+    description: Operation about orders
+  - name: customer
+    description: Operations about customer
+  - name: category
+    description: Operations about category
+  - name: order
+    description: Operations about order
+  - name: order detail
+    description: Operations about orderdetails
+  - name: product
+    description: Operations about products
+  - name: user
+    description: Operations about signup, signin and so on
+
+paths:
+  /api/v1/category:
+    get:
+      tags:
+        - category
+      summary: Returns all the matched category
+      description: Returns the category that matches the given query criteria
+      operationId: getCategory
+      parameters:
+        - name: tag
+          in: query
+          description: Category tag
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Category name
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Query page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: size
+          in: query
+          description: Query page size
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        200:
+          description: For successful fetch.
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int
+        categoryName:
+          type: string
+          example: Electronic
+        description:
+          type: string
+          example: Electronic appliances 
